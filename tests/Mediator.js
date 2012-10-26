@@ -1,5 +1,5 @@
 
-var Mediator = require("../src/Mediator"),
+var Mediator = require("../index"),
     expect = require("expect.js")
 
 describe("Mediator", function() {

@@ -2,7 +2,7 @@
   "name": "Mediator",
   "version": "0.0.1",
   "description": "Constructor for Mediator objects. Namespaced pub sub.",
-  "main": "src/mediator.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha tests/*"
   },
