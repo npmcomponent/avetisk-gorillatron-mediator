@@ -1,6 +1,5 @@
 /**
   @class Mediator
-  @extends Backbone.Events
   @exports Mediator
 */
 
