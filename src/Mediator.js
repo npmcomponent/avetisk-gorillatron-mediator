@@ -1,3 +1,9 @@
+/**
+  @class Mediator
+  @extends Backbone.Events
+  @exports Mediator
+*/
+
 
 
 function Mediator( config ) {
@@ -5,10 +11,26 @@ function Mediator( config ) {
   this.configuration = Mediator.configuration
 }
 
+
+/**
+  Configuration for mediators.
+  @public
+  @static
+  @type Object
+*/
 Mediator.configuration = {
   namespaceDelimiter: "::"
 }
 
+
+/**
+  Binds a callback to be called when published to the channel given.
+  @public
+  @type Function
+  @param {String} channel The name of the channel to bind the callback to
+  @param {Function} callback The callback to fire
+  @param {Object} context The context of the callback. The callback will have this paramter as its this value
+*/
 Mediator.prototype.subscribe = function( channel, callback, context ) {
   if( typeof channel !== 'string' ) 
     throw new TypeError( 'channel must be string' ) 
@@ -24,6 +46,14 @@ Mediator.prototype.subscribe = function( channel, callback, context ) {
   })
 }
 
+
+/**
+  Removes a callback where the given arguments mathes the listener properties
+  @public
+  @type Function
+  @param {String} channel The name of the channel to bind the callback to
+  @param {Function} callback The callback to fire
+*/
 Mediator.prototype.unsubscribe = function( channel, callback ) {
   var subscribingChannel, subscriptions, i, subscription
 
@@ -49,6 +79,15 @@ Mediator.prototype.unsubscribe = function( channel, callback ) {
   }
 }
 
+
+/**
+  Publish to a channel, passing the arguments after channel to the callback.
+  @public
+  @type Function
+  @param {String} channel The name of the channel to unbind the callback from
+  @param {Mixed[]} args The arguments after channel to be passed to callback
+  @returns {Boolean}
+*/
 Mediator.prototype.publish = function( channel, callback ) {
   var subscriptions, args, subscribingChannel, i, subscription
 
@@ -74,6 +113,15 @@ Mediator.prototype.publish = function( channel, callback ) {
   return true
 }
 
+
+/**
+  Check if a channel name is within the bound of another channel namespace.
+  @public
+  @type Function
+  @param {String} requested The name of the channel published to
+  @param {String} nameSpace The name of the subscribing channel to test against
+  @returns Boolean
+*/
 Mediator.prototype.namespaceMatch = function( requested, nameSpace ) {
   var publishNamespace, subscriptionNamespace, i
 
