@@ -6,10 +6,9 @@
   "scripts": {
     "test": "mocha tests/*"
   },
-  "dependencies": {
-    "development": {
-      "mocha": ">=1.0.3"
-    }
+  "devDependencies": {
+    "expect.js": "~0.2.0",
+    "mocha": ">=1.6.0"
   },
   "license": "MIT"
 }
