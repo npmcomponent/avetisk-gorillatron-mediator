@@ -1,7 +1,7 @@
 {
-  "name": "Mediator",
+  "name": "mediator",
   "version": "0.0.1",
-  "description": "Constructor for Mediator objects. Namespaced pub sub.",
+  "description": "Loosly coupled pub-sub communiaction in your app. Namespaced.",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/*"
