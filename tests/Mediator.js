@@ -133,7 +133,10 @@ describe("Mediator", function() {
         expect( mediator.namespaceMatch("foo::bar::lol", "foo") ).to.equal( true )
 
         expect( mediator.namespaceMatch("foo::bar", "foo::bar") ).to.equal( true )  
-        expect( mediator.namespaceMatch("foo::bar::nice", "foo::bar") ).to.equal( true )  
+        expect( mediator.namespaceMatch("foo::bar::nice", "foo::bar") ).to.equal( true )
+
+        expect( mediator.namespaceMatch("foo::bar::nice", "foo::bar") ).to.equal( true )
+
         expect( mediator.namespaceMatch("not::bar::nice", "foo::bar") ).to.equal( false )  
 
       })
@@ -155,9 +158,10 @@ describe("Mediator", function() {
       
       mediator.publish("foo", 1)
       mediator.publish("foo::bar", 1)
+      mediator.publish("foo::doesntexist", 1)
       mediator.publish("foo::bar::lol", 1)
-
-      expect( stat["foo"] ).to.equal( 3 )
+      
+      expect( stat["foo"] ).to.equal( 4 )
       expect( stat["foo::bar"] ).to.equal( 2 )
       expect( stat["foo::bar::lol"] ).to.equal( 1 )
 
