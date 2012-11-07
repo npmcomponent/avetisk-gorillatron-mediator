@@ -1,13 +1,15 @@
+
+var extend = require( "gorillatron-extend" )
+
+
 /**
   @class Mediator
   @exports Mediator
 */
 
-
-
 function Mediator( config ) {
   this.channels = {}
-  this.configuration = Mediator.configuration
+  this.configuration = extend( Mediator.configuration, config || {} )
 }
 
 
@@ -94,7 +96,7 @@ Mediator.prototype.publish = function( channel, callback ) {
 
   for( subscribingChannel in this.channels ) {
     if( this.namespaceMatch(channel, subscribingChannel) ) {
-      if( this.channels[channel] ) {
+      if( this.channels[subscribingChannel] ) {
         subscriptions = subscriptions.concat( this.channels[subscribingChannel] )
       }
     }
@@ -117,18 +119,18 @@ Mediator.prototype.publish = function( channel, callback ) {
   Check if a channel name is within the bound of another channel namespace.
   @public
   @type Function
-  @param {String} requested The name of the channel published to
-  @param {String} nameSpace The name of the subscribing channel to test against
+  @param {String} targetNs The name of the channel published to
+  @param {String} outerNs The name of the subscribing channel to test against
   @returns Boolean
 */
-Mediator.prototype.namespaceMatch = function( requested, nameSpace ) {
-  var publishNamespace, subscriptionNamespace, i
+Mediator.prototype.namespaceMatch = function( targetNs, outerNs ) {
+  var targetNamespace, outerNamespace, i
 
-  publishNamespace = requested.split( this.configuration.namespaceDelimiter )
-  subscriptionNamespace = nameSpace.split( this.configuration.namespaceDelimiter )
+  targetNamespace = targetNs.split( this.configuration.namespaceDelimiter )
+  outerNamespace = outerNs.split( this.configuration.namespaceDelimiter )
 
-  for( i = 0; i < subscriptionNamespace.length; i++ ) {
-    if( publishNamespace[i] !== subscriptionNamespace[i] ) {
+  for( i = 0; i < outerNamespace.length; i++ ) {
+    if( outerNamespace[i] !== targetNamespace[i] ) {
       return false
     }
   }
